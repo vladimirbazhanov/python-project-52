@@ -1,3 +1,6 @@
+dev:
+	poetry run ./manage.py runserver
+
 install:
 	poetry install
 
