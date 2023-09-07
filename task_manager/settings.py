@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'taskmanager-pe0c.onrender.com', 'webserver']
 
-
 # Application definition
 
 INSTALLED_APPS = [
