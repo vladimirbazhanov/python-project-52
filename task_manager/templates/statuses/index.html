@@ -1,14 +1,10 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <div class="float-start">
-        <h3>Статусы задач</h3>
-      </div>
-      <div class="float-end">
-        <a class="btn btn-primary btn-sm" href="{% url 'statuses:create' %}">Создать статус</a>
-      </div>
-    </div>
+  <div class="float-start">
+    <h3>Статусы</h3>
+  </div>
+  <div class="float-end">
+    <a class="btn btn-primary btn-sm" href="{% url 'statuses:create' %}">Создать статус</a>
   </div>
 {% endblock %}

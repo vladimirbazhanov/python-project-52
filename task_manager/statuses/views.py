@@ -7,5 +7,10 @@ def index(request):
 
 
 def create(request):
-    form = StatusForm()
-    return render(request, 'statuses/create.html')
+    if request.method == 'GET':
+        form = StatusForm()
+        return render(request, 'statuses/create.html', {'form': form})
+    elif request.method == 'POST':
+        form = StatusForm(data=request.POST)
+        if form.is_valid():
+            pass
