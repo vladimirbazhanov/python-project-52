@@ -1,0 +1,10 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+  <div class="float-start">
+    <h3>Задачи</h3>
+  </div>
+  <div class="float-end">
+    <a class="btn btn-primary btn-sm" href="{% url 'tasks:create' %}">Создать задачу</a>
+  </div>
+{% endblock %}
