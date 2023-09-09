@@ -8,7 +8,6 @@ from task_manager.statuses.models import Status
 class StatusesView(LoginRequiredWithMessageMixin, View):
     def get(self, request, *args, **kwargs):
         statuses = Status.objects.filter(user_id=request.user.id).order_by('name')
-
         return render(request, 'statuses/index.html', {'statuses': statuses})
 
 
@@ -25,3 +24,19 @@ class CreateStatusView(LoginRequiredWithMessageMixin, View):
             return HttpResponseRedirect('/statuses')
         else:
             return render(request, 'statuses/create.html', {'form': form})
+
+
+class UpdateStatusView(LoginRequiredWithMessageMixin, View):
+    def get(self, request, *args, **kwargs):
+        status = Status.objects.get(id=kwargs['id'])
+        form = StatusForm(instance=status)
+        return render(request, 'statuses/update.html', {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        status = Status.objects.get(id=kwargs['id'])
+        form = StatusForm(instance=status, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/statuses')
+        else:
+            return render(request, 'statuses/update.html', {'form': form})

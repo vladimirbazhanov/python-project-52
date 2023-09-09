@@ -11,7 +11,8 @@
     <thead>
       <th>ID</th>
       <th>Имя</th>
-      <th>Дата создания</th><th></th>
+      <th>Дата создания</th>
+      <th></th>
     </thead>
     <tbody>
       {% for status in statuses %}
@@ -20,7 +21,7 @@
           <td>{{ status.name }}</td>
           <td>{{ status.timestamp }}</td>
           <td class="float-end">
-            <a href='#' class="btn btn-primary btn-sm">Изменить</a>
+            <a href='{% url 'statuses:update' status.id %}' class="btn btn-primary btn-sm">Изменить</a>
             <a href='#' class="btn btn-danger btn-sm">Удалить</a>
           </td>
         </tr>

@@ -5,5 +5,6 @@ app_name = 'statuses'
 
 urlpatterns = [
     path('', views.StatusesView.as_view(), name='index'),
-    path('create/', views.CreateStatusView.as_view(), name='create')
+    path('create/', views.CreateStatusView.as_view(), name='create'),
+    path('<id>/update/', views.UpdateStatusView.as_view(), name='update')
 ]
