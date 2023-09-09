@@ -1,13 +1,13 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-    <h3>Изменить статус</h1>
-    <form method="POST" action="{% url 'statuses:update' form.instance.id %}">
+    <h3>Создать задачу</h3>
+    <form method="POST" action="{% url 'statuses:create' %}">
       {% csrf_token %}
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="card">
-            <div class="card-header">Изменить статус</div>
+            <div class="card-header">Создать задачу</div>
             <div class="card-body form-inputs">
               {% if form.errors %}
                 {{ form.errors }}
@@ -19,9 +19,14 @@
                 {{ form.name }}
               </div>
               <div class="mb-3">
-                <input type="submit" value="Изменить" class="btn btn-primary">
+                <label for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
               </div>
-            </div>
+              <div class="mb-3">
+                {{ form.description }}
+              </div>
+              <div class="mb-3">
+                <input type="submit" value="Создать" class="btn btn-primary">
+              </div>
           </div>
         </div>
       </div>

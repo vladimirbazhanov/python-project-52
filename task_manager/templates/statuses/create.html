@@ -1,7 +1,7 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-    <h3>Создать статус</h1>
+    <h3>Создать статус</h3>
     <form method="POST" action="{% url 'statuses:create' %}">
       {% csrf_token %}
       <div class="row">
@@ -13,7 +13,7 @@
                 {{ form.errors }}
               {% endif %}
               <div class="mb-3">
-                <label for="{{ form.name.id_for_lable }}">{{ form.name.label }}</label>
+                <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
               </div>
               <div class="mb-3">
                 {{ form.name }}
