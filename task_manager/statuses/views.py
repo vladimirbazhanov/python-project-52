@@ -40,3 +40,14 @@ class UpdateStatusView(LoginRequiredWithMessageMixin, View):
             return HttpResponseRedirect('/statuses')
         else:
             return render(request, 'statuses/update.html', {'form': form})
+
+
+class DeleteStatusView(LoginRequiredWithMessageMixin, View):
+    def get(self, request, *args, **kwargs):
+        status = Status.objects.filter(user_id=request.user.id).get(id=kwargs['id'])
+        return render(request, 'statuses/delete.html', {'status': status})
+
+    def post(self, request, *args, **kwargs):
+        status = Status.objects.filter(user_id=request.user.id).get(id=kwargs['id'])
+        status.delete()
+        return HttpResponseRedirect('/statuses')
