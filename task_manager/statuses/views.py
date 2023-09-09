@@ -1,16 +1,21 @@
 from django.shortcuts import render
 from task_manager.statuses.forms import StatusForm
+from django.views import View
+from task_manager.mixins import LoginRequiredWithMessageMixin
 
 
-def index(request):
-    return render(request, 'statuses/index.html')
+class StatusesView(LoginRequiredWithMessageMixin, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'statuses/index.html')
 
 
-def create(request):
-    if request.method == 'GET':
+class CreateStatusView(LoginRequiredWithMessageMixin, View):
+    def get(self, request, *args, **kwargs):
         form = StatusForm()
         return render(request, 'statuses/create.html', {'form': form})
-    elif request.method == 'POST':
+
+
+    def post(self, request, *args, **kwargs):
         form = StatusForm(data=request.POST)
         if form.is_valid():
             pass
