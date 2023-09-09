@@ -2,7 +2,7 @@
 
 {% block content %}
     <h3>Создать задачу</h3>
-    <form method="POST" action="{% url 'statuses:create' %}">
+    <form method="POST" action="{% url 'tasks:create' %}">
       {% csrf_token %}
       <div class="row">
         <div class="col-md-6 offset-md-3">
@@ -24,6 +24,19 @@
               <div class="mb-3">
                 {{ form.description }}
               </div>
+              <div class="mb-3">
+                <label for="{{ form.status.id_for_label }}">{{ form.status.label }}</label>
+              </div>
+              <div class="mb-3">
+                {{ form.status }}
+              </div>
+              <div class="mb-3">
+                <label for="{{ form.executor.id_for_label }}">{{ form.executor.label }}</label>
+              </div>
+              <div class="mb-3">
+                {{ form.executor }}
+              </div>
+
               <div class="mb-3">
                 <input type="submit" value="Создать" class="btn btn-primary">
               </div>
