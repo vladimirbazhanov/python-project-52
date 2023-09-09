@@ -7,4 +7,24 @@
   <div class="float-end">
     <a class="btn btn-primary btn-sm" href="{% url 'statuses:create' %}">Создать статус</a>
   </div>
+  <table class="table">
+    <thead>
+      <th>ID</th>
+      <th>Имя</th>
+      <th>Дата создания</th><th></th>
+    </thead>
+    <tbody>
+      {% for status in statuses %}
+        <tr>
+          <td>{{ status.id }}</td>
+          <td>{{ status.name }}</td>
+          <td>{{ status.timestamp }}</td>
+          <td class="float-end">
+            <a href='#' class="btn btn-primary btn-sm">Изменить</a>
+            <a href='#' class="btn btn-danger btn-sm">Удалить</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}

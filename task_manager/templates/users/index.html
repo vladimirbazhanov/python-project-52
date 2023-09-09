@@ -11,7 +11,6 @@
             <th>Полное имя</th>
             <th>Дата/время создания</th>
             <th></th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -22,8 +21,10 @@
             <td>{{ user.email }}</td>
             <td>{{ user.first_name }} {{ user.last_name }}</td>
             <td>{{ user.date_joined }}</td>
-            <td><a href='#' class="btn btn-primary btn-sm">Изменить</a></td>
-            <td><a href='#' class="btn btn-danger btn-sm">Удалить</a></td>
+            <td class="float-end">
+              <a href='#' class="btn btn-primary btn-sm">Изменить</a>
+              <a href='#' class="btn btn-danger btn-sm">Удалить</a>
+            </td>
         </tr>
         {%  endfor %}
     </tbody>
