@@ -39,7 +39,7 @@
                     <a class="nav-link" aria-current="page" href="{% url 'login' %}">Вход</a>
                   </li>
                   <li>
-                    <a class="nav-link" aria-current="page" href="/users/new">Регистрация</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'users:create' %}">Регистрация</a>
                   </li>
                 {% endif %}
             </ul>
