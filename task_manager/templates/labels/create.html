@@ -1,7 +1,6 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-    <h3>Создать метку</h3>
     <form method="POST" action="{% url 'labels:create' %}">
       {% csrf_token %}
       <div class="row">

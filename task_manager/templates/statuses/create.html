@@ -1,7 +1,6 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-    <h3>Создать статус</h3>
     <form method="POST" action="{% url 'statuses:create' %}">
       {% csrf_token %}
       <div class="row">
