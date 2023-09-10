@@ -33,7 +33,7 @@ class UpdateStatusView(LoginRequiredWithMessageMixin, View):
         return render(request, 'statuses/update.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
-        status = Status.objects.get(id=kwargs['id'])
+        status = Status.objects.filter(user_id=request.user.id).get(id=kwargs['id'])
         form = StatusForm(instance=status, data=request.POST)
         if form.is_valid():
             form.save()

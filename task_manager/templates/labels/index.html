@@ -1,0 +1,31 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+  <div class="float-start">
+    <h3>Метки</h3>
+  </div>
+  <div class="float-end">
+    <a class="btn btn-primary btn-sm" href="{% url 'labels:create' %}">Создать метку</a>
+  </div>
+  <table class="table">
+    <thead>
+      <th>ID</th>
+      <th>Имя</th>
+      <th>Дата создания</th>
+      <th></th>
+    </thead>
+    <tbody>
+      {% for label in labels %}
+        <tr>
+          <td>{{ label.id }}</td>
+          <td>{{ label.name }}</td>
+          <td>{{ label.timestamp }}</td>
+          <td class="float-end">
+            <a href='{% url 'labels:update' status.id %}' class="btn btn-primary btn-sm">Изменить</a>
+            <a href='{% url 'labels:delete' status.id %}' class="btn btn-danger btn-sm">Удалить</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
