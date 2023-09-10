@@ -21,8 +21,8 @@
           <td>{{ label.name }}</td>
           <td>{{ label.timestamp }}</td>
           <td class="float-end">
-            <a href='{% url 'labels:update' status.id %}' class="btn btn-primary btn-sm">Изменить</a>
-            <a href='{% url 'labels:delete' status.id %}' class="btn btn-danger btn-sm">Удалить</a>
+            <a href='{% url 'labels:update' label.id %}' class="btn btn-primary btn-sm">Изменить</a>
+            <a href='{% url 'labels:delete' label.id %}' class="btn btn-danger btn-sm">Удалить</a>
           </td>
         </tr>
       {% endfor %}
