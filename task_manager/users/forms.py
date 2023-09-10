@@ -1,7 +1,7 @@
 from django import forms
 from task_manager.users.models import User
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, get_user_model, password_validation
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import password_validation
 from django.utils.translation import gettext_lazy as _
 
 
@@ -22,8 +22,19 @@ class UserForm(UserCreationForm):
         help_text=_("Enter the same password as before, for verification."),
     )
 
-    #password = forms.CharField(max_length=32, widget=forms.TextInput(attrs={'class': 'form-control'}))
-
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'password1', 'password2']
+
+
+class UserAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={"autofocus": True, "class": 'form-control'}
+        )
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class": 'form-control'}
+        )
+    )
