@@ -9,3 +9,4 @@ class Task(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user')
     executor = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='executor')
     status = models.ForeignKey(to=Status, on_delete=models.PROTECT)
+    timestamp = models.DateTimeField(auto_now_add=True)

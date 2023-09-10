@@ -1,0 +1,14 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <h3>Удаление задачи</h3>
+    <div class="mb-3">
+      <strong>Вы уверены, что хотите удалить задачу {{ task.name }} ?</strong>
+    </div>
+    <form method="POST" action="{% url 'tasks:delete' task.id %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <input class='btn btn-danger' type="submit" value="Да, удалить">
+      </div>
+    </form>
+{% endblock %}

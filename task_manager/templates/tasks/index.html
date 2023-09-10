@@ -7,4 +7,33 @@
   <div class="float-end">
     <a class="btn btn-primary btn-sm" href="{% url 'tasks:create' %}">Создать задачу</a>
   </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Статус</th>
+        <th>Автор</th>
+        <th>Исполнитель</th>
+        <th>Дата создания</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+        <tr>
+          <td>{{ task.id }}</td>
+          <td>{{ task.name }}</td>
+          <td>{{ task.status.name }}</td>
+          <td>{{ task.user.username }}</td>
+          <td>{{ task.executor.username }}</td>
+          <td>{{ task.timestamp }}</td>
+          <td class="float-end">
+            <a href='{% url 'tasks:update' task.id %}' class="btn btn-primary btn-sm">Изменить</a>
+            <a href='{% url 'tasks:delete' task.id %}' class="btn btn-danger btn-sm">Удалить</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
