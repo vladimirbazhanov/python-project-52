@@ -27,7 +27,7 @@
           <td>{{ task.status.name }}</td>
           <td>{{ task.user.username }}</td>
           <td>{{ task.executor.username }}</td>
-          <td>{{ task.timestamp }}</td>
+          <td>{{ task.timestamp|date:'d.m.Y H:i' }}</td>
           <td class="float-end">
             <a href='{% url 'tasks:update' task.id %}' class="btn btn-primary btn-sm">Изменить</a>
             <a href='{% url 'tasks:delete' task.id %}' class="btn btn-danger btn-sm">Удалить</a>

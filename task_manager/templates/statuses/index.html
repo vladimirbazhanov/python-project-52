@@ -19,7 +19,7 @@
         <tr>
           <td>{{ status.id }}</td>
           <td>{{ status.name }}</td>
-          <td>{{ status.timestamp }}</td>
+          <td>{{ status.timestamp|date:'d.m.Y H:i' }}</td>
           <td class="float-end">
             <a href='{% url 'statuses:update' status.id %}' class="btn btn-primary btn-sm">Изменить</a>
             <a href='{% url 'statuses:delete' status.id %}' class="btn btn-danger btn-sm">Удалить</a>
