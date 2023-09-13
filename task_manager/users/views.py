@@ -21,8 +21,8 @@ class LoginUser(View):
         MSG = 'Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут быть чувствительны к регистру.'
         form = UserAuthenticationForm(data=request.POST)
         if form.is_valid():
-            username = request.cleaned_data['username']
-            password = request.cleaned_data['password']
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)

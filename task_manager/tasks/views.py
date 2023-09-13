@@ -6,6 +6,7 @@ from django.contrib import messages
 from task_manager.mixins import LoginRequiredWithMessageMixin
 from task_manager.tasks.forms import TaskForm
 from task_manager.tasks.models import Task
+from django.urls import reverse
 
 
 class TasksView(LoginRequiredWithMessageMixin, View):
@@ -14,7 +15,7 @@ class TasksView(LoginRequiredWithMessageMixin, View):
         return render(request,'tasks/index.html',{'tasks': tasks})
 
 
-class CreateTaskView(LoginRequiredWithMessageMixin, View):
+class CreateTaskView(View):
     def get(self, request, *args, **kwargs):
         form = TaskForm()
         return render(request,
@@ -28,7 +29,7 @@ class CreateTaskView(LoginRequiredWithMessageMixin, View):
         if form.is_valid():
             form.save()
             messages.info(request, 'Задача успешно создана')
-            return HttpResponseRedirect('/tasks')
+            return HttpResponseRedirect(reverse('tasks:index'))
         else:
             return render(request,'tasks/create.html',{'form': form})
 
