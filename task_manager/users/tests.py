@@ -1,3 +1,7 @@
-from django.test import TestCase
+import factory
+from task_manager.users.models import User
 
-# Create your tests here.
+
+class UserFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = User

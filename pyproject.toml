@@ -16,6 +16,9 @@ django-extensions = "^3.2.3"
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.1.0"
 python-dotenv = "^1.0.0"
+coverage = "^7.3.1"
+faker = "^19.6.1"
+factory-boy = "^3.3.0"
 
 [build-system]
 requires = ["poetry-core"]
