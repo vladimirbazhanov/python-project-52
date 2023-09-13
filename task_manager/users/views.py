@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.views import View
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from task_manager.users.forms import UserForm, UserAuthenticationForm
 from django.contrib import auth
@@ -17,15 +18,19 @@ class LoginUser(View):
         return render(request, 'registration/login.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
+        MSG = 'Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут быть чувствительны к регистру.'
         form = UserAuthenticationForm(data=request.POST)
         if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
+            username = request.cleaned_data['username']
+            password = request.cleaned_data['password']
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
-                return HttpResponseRedirect('/')
-
+            else:
+                messages.error(request, MSG)
+        else:
+            messages.error(request, MSG)
+        return HttpResponseRedirect('/')
 
 class LogoutUser(View):
     def post(self, request, *args, **kwargs):

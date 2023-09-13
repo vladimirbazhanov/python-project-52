@@ -2,7 +2,7 @@ from django.test import TestCase
 from faker import Faker
 import factory
 from task_manager.labels.models import Label
-from task_manager.users.tests import UserFactory
+from task_manager.users.tests.factories import UserFactory
 fake = Faker()
 
 
@@ -12,8 +12,8 @@ class LabelFactory(factory.django.DjangoModelFactory):
     name = 'label'
 
 
-class LabelTestCase(TestCase):
-    def test_create_label(self):
+class LabelCreateTestCase(TestCase):
+    def test_create_label_model(self):
         name = fake.word()
         user = UserFactory()
 
