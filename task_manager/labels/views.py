@@ -59,7 +59,7 @@ class DeleteLabelView(LoginRequiredWithMessageMixin, View):
                  .filter(user_id=request.user.id)
                  .get(id=kwargs['id']))
         return render(request,
-                      'label/delete.html',
+                      'labels/delete.html',
                       {'label': label}
                       )
 

@@ -42,7 +42,7 @@ class LogoutUser(View):
 
 class CreateUserView(View):
     def get(self, request, *args, **kwargs):
-        form = UserRegistrationForm()
+        form = UserForm()
         return render(request, 'users/create.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
