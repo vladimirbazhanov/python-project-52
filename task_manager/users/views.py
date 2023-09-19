@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from task_manager.users.forms import UserForm, UserAuthenticationForm
 from django.contrib import auth
+from task_manager.mixins import LoginRequiredWithMessageMixin
+from .models import User
 
 class UsersView(View):
     def get(self, request, *args, **kwargs):
@@ -40,7 +42,7 @@ class LogoutUser(View):
 
 class CreateUserView(View):
     def get(self, request, *args, **kwargs):
-        form = UserForm()
+        form = UserRegistrationForm()
         return render(request, 'users/create.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
@@ -54,3 +56,29 @@ class CreateUserView(View):
             return HttpResponseRedirect('/')
         else:
             return render(request, 'users/create.html', {'form': form})
+
+
+class UpdateUserView(LoginRequiredWithMessageMixin, View):
+    def get(self, request, *args, **kwargs):
+        user = User.objects.get(id=kwargs['id'])
+        if not request.user.id == user.id:
+            messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+            return HttpResponseRedirect('/users')
+
+        form = UserForm(instance=user)
+        return render(request, 'users/update.html', { 'form': form})
+
+    def post(self, request, *args, **kwargs):
+        user = User.objects.get(id=kwargs['id'])
+        if not request.user.id == user.id:
+            messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+            return HttpResponseRedirect('/users')
+
+        form = UserForm(instance=user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'Пользователь успешно изменен')
+            return HttpResponseRedirect('/users')
+        else:
+            messages.error(request, 'Ошибка')
+            return render(request, 'users/update.html', {'form': form})
