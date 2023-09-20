@@ -90,17 +90,18 @@ class UpdateUserView(LoginRequiredWithMessageMixin, View):
 class DeleteUserView(LoginRequiredWithMessageMixin, View):
     def get(self, request, *args, **kwargs):
         user = User.objects.get(id=kwargs['id'])
-        if not user.id == request.user.id:
+        if user.id == request.user.id:
+            return render(request, 'users/delete.html', {'user': user})
+        else:
             messages.error(request, 'У вас нет прав для изменения другого пользователя.')
             return HttpResponseRedirect('/users')
-        else:
-            return render(request,'users/delete.html',{'user': user})
 
     def post(self, request, *args, **kwargs):
         user = User.objects.get(id=kwargs['id'])
-        if not user.id == request.user.id:
+        if user.id == request.user.id:
+            messages.info(request, 'Пользователь успешно удален')
+            user.delete()
+        else:
             messages.error(request, 'У вас нет прав для изменения другого пользователя.')
             return HttpResponseRedirect('/users')
-        else:
-            user.delete()
         return HttpResponseRedirect('/users')
