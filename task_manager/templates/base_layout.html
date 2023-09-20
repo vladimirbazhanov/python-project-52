@@ -39,10 +39,10 @@
                   </li>
                 {% else %}
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'login' %}">Вход</a>
+                    <a class="nav-link" role="button" aria-current="page" href="{% url 'login' %}">Вход</a>
                   </li>
                   <li>
-                    <a class="nav-link" aria-current="page" href="{% url 'users:create' %}">Регистрация</a>
+                    <a class="nav-link" role="button" aria-current="page" href="{% url 'users:create' %}">Регистрация</a>
                   </li>
                 {% endif %}
             </ul>
