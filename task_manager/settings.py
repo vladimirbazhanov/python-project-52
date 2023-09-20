@@ -133,9 +133,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/login'
 
-ROLLBAR = {
-    'access_token': 'c32f11038ee447669fe1b213f5f9f461',
-    'environment': 'development' if DEBUG else 'production',
-    'code_version': '1.0',
-    'root': BASE_DIR,
-}
+if not DEBUG:
+    ROLLBAR = {
+        'access_token': 'c32f11038ee447669fe1b213f5f9f461',
+        'environment': 'production',
+        'code_version': '1.0',
+        'root': BASE_DIR,
+    }

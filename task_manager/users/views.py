@@ -51,11 +51,12 @@ class CreateUserView(View):
         form = UserForm(data=request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
-            user = auth.authenticate(username=username, password=password)
-            auth.login(request, user)
-            return HttpResponseRedirect('/')
+            # username = form.cleaned_data['username']
+            # password = form.cleaned_data['password1']
+            # user = auth.authenticate(username=username, password=password)
+            # auth.login(request, user)
+            messages.info(request, 'Пользователь успешно зарегистрирован')
+            return HttpResponseRedirect('/login')
         else:
             return render(request, 'users/create.html', {'form': form})
 
