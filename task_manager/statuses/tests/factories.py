@@ -8,4 +8,4 @@ class StatusFactory(factory.django.DjangoModelFactory):
         model = Status
 
     name = factory.Faker('word')
-    user = UserFactory()
+    user = factory.SubFactory(UserFactory)

@@ -7,8 +7,7 @@ class TaskCreateTestCase(TestCase):
     def test_create_task_model(self):
         task = TaskFactory(
             name='Test task',
-            description='with description',
-            user=UserFactory.create()
+            description='with description'
         )
 
         self.assertEquals(task.name, 'Test task')

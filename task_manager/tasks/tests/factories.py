@@ -10,12 +10,7 @@ class TaskFactory(factory.django.DjangoModelFactory):
 
     name = factory.Faker('word')
     description = factory.Faker('sentence')
-    status = StatusFactory()
-    user = UserFactory()
-    executor = UserFactory()
+    status = factory.SubFactory(StatusFactory)
+    user = factory.SubFactory(UserFactory)
+    executor = factory.SubFactory(UserFactory)
 
-    @factory.post_generation
-    def labels(self, create, extracted, **kwargs):
-        if not create or not extracted:
-            return
-        self.labels.add(*extracted)
