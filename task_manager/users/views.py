@@ -7,6 +7,7 @@ from django.contrib import auth
 from task_manager.mixins import LoginRequiredWithMessageMixin
 from .models import User
 
+
 class UsersView(View):
     def get(self, request, *args, **kwargs):
         User = get_user_model()
@@ -20,7 +21,8 @@ class LoginUser(View):
         return render(request, 'registration/login.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
-        MSG = 'Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут быть чувствительны к регистру.'
+        MSG = 'Пожалуйста, введите правильные имя пользователя и пароль. '\
+              'Оба поля могут быть чувствительны к регистру.'
         form = UserAuthenticationForm(data=request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -34,6 +36,7 @@ class LoginUser(View):
         else:
             messages.error(request, MSG)
         return HttpResponseRedirect('/')
+
 
 class LogoutUser(View):
     def post(self, request, *args, **kwargs):
@@ -69,7 +72,7 @@ class UpdateUserView(LoginRequiredWithMessageMixin, View):
             return HttpResponseRedirect('/users')
 
         form = UserForm(instance=user)
-        return render(request, 'users/update.html', { 'form': form})
+        return render(request, 'users/update.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
         user = User.objects.get(id=kwargs['id'])
