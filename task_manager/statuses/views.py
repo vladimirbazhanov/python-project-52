@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from task_manager.statuses.forms import StatusForm
 from django.views import View
+from django.contrib import messages
 from task_manager.mixins import LoginRequiredWithMessageMixin
 from task_manager.statuses.models import Status
 
@@ -29,6 +30,7 @@ class CreateStatusView(LoginRequiredWithMessageMixin, View):
         form.instance.user = request.user
         if form.is_valid():
             form.save()
+            messages.info(request, 'Статус успешно создан')
             return HttpResponseRedirect('/statuses')
         else:
             return render(request,
@@ -54,6 +56,7 @@ class UpdateStatusView(LoginRequiredWithMessageMixin, View):
         form = StatusForm(instance=status, data=request.POST)
         if form.is_valid():
             form.save()
+            messages.info(request, 'Статус успешно изменен')
             return HttpResponseRedirect('/statuses')
         else:
             return render(request,
