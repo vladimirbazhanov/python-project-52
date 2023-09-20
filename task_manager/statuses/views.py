@@ -77,4 +77,4 @@ class DeleteStatusView(LoginRequiredWithMessageMixin, View):
         status = Status.objects.get(id=kwargs['id'])
         status.delete()
         messages.info(request, 'Статус успешно удален')
-        return HttpResponseRedirect('/statuses')
+        return HttpResponseRedirect('/statuses/')

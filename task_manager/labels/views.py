@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from task_manager.labels.forms import LabelForm
 from django.views import View
+from django.contrib import messages
 from task_manager.mixins import LoginRequiredWithMessageMixin
 from task_manager.labels.models import Label
 
@@ -21,6 +22,7 @@ class CreateLabelView(LoginRequiredWithMessageMixin, View):
         form.instance.user = request.user
         if form.is_valid():
             form.save()
+            messages.info(request, 'Метка успешно создана')
             return HttpResponseRedirect('/labels')
         else:
             return render(request,
@@ -45,6 +47,7 @@ class UpdateLabelView(LoginRequiredWithMessageMixin, View):
         form = LabelForm(instance=label, data=request.POST)
         if form.is_valid():
             form.save()
+            messages.info(request, 'Метка успешно изменена')
             return HttpResponseRedirect('/labels')
         else:
             return render(request,
@@ -55,17 +58,14 @@ class UpdateLabelView(LoginRequiredWithMessageMixin, View):
 
 class DeleteLabelView(LoginRequiredWithMessageMixin, View):
     def get(self, request, *args, **kwargs):
-        label = (Label.objects
-                 .filter(user_id=request.user.id)
-                 .get(id=kwargs['id']))
+        label = Label.objects.get(id=kwargs['id'])
         return render(request,
                       'labels/delete.html',
                       {'label': label}
                       )
 
     def post(self, request, *args, **kwargs):
-        label = (Label.objects
-                 .filter(user_id=request.user.id)
-                 .get(id=kwargs['id']))
+        label = Label.objects.get(id=kwargs['id'])
         label.delete()
-        return HttpResponseRedirect('/labels')
+        messages.info(request, 'Метка успешно удалена')
+        return HttpResponseRedirect('/labels/')
