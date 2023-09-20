@@ -27,6 +27,7 @@ class LoginUser(View):
             password = form.cleaned_data['password']
             user = auth.authenticate(username=username, password=password)
             if user:
+                messages.info(request, 'Вы залогинены')
                 auth.login(request, user)
             else:
                 messages.error(request, MSG)
