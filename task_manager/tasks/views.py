@@ -78,6 +78,7 @@ class DeleteTaskView(LoginRequiredWithMessageMixin, View):
     def post(self, request, *args, **kwargs):
         task = Task.objects.get(id=kwargs['id'])
         if task.user_id == request.user.id:
+            messages.info(request, 'Задача успешно удалена')
             task.delete()
         else:
             messages.error(request, 'Задачу может удалить только ее автор')
