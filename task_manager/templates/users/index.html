@@ -26,7 +26,7 @@
               <a href='{% url 'users:update' user.id %}' class="btn btn-primary btn-sm">Изменить</a>
             </td>
             <td>
-              <a href='#' class="btn btn-danger btn-sm">Удалить</a>
+              <a href='{% url 'users:delete' user.id %}' class="btn btn-danger btn-sm">Удалить</a>
             </td>
         </tr>
         {%  endfor %}
