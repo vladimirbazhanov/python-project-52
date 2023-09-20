@@ -67,17 +67,14 @@ class UpdateStatusView(LoginRequiredWithMessageMixin, View):
 
 class DeleteStatusView(LoginRequiredWithMessageMixin, View):
     def get(self, request, *args, **kwargs):
-        status = (Status.objects
-                  .filter(user_id=request.user.id)
-                  .get(id=kwargs['id']))
+        status = Status.objects.get(id=kwargs['id'])
         return render(request,
                       'statuses/delete.html',
                       {'status': status}
                       )
 
     def post(self, request, *args, **kwargs):
-        status = (Status.objects
-                  .filter(user_id=request.user.id)
-                  .get(id=kwargs['id']))
+        status = Status.objects.get(id=kwargs['id'])
         status.delete()
+        messages.info(request, 'Статус успешно удален')
         return HttpResponseRedirect('/statuses')
