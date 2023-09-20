@@ -6,7 +6,7 @@ authors = ["Vladimir Bazhanov <vladimir.a.bazhanov@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 Django = "^4.2.4"
 dj-database-url = "^2.1.0"
 gunicorn = "^21.2.0"
