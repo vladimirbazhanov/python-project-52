@@ -14,6 +14,10 @@ class TasksView(LoginRequiredWithMessageMixin, View):
         tasks = Task.objects.all()
         return render(request,'tasks/index.html',{'tasks': tasks})
 
+class TaskView(LoginRequiredWithMessageMixin, View):
+    def get(self, request, *args, **kwargs):
+        task = Task.objects.get(id=kwargs['id'])
+        return render(request, 'tasks/show.html', {'task': task})
 
 class CreateTaskView(View):
     def get(self, request, *args, **kwargs):
