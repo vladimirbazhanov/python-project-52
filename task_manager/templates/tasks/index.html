@@ -1,11 +1,46 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-  <div class="float-start">
-    <h3>Задачи</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="float-start">
+        <h3>Задачи</h3>
+      </div>
+      <div class="float-end">
+        <a class="btn btn-primary btn-sm" href="{% url 'tasks:create' %}">Создать задачу</a>
+      </div>
+    </div>
   </div>
-  <div class="float-end">
-    <a class="btn btn-primary btn-sm" href="{% url 'tasks:create' %}">Создать задачу</a>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+            <form method="GET" action="{% url 'tasks:index' %}">
+              <div class="row">
+                <div class="col-auto">
+                  {{ form.status }}
+                </div>
+                <div class="col-auto">
+                  {{ form.executor }}
+                </div>
+                <div class="col-auto">
+                  {{ form.labels }}
+                </div>
+                <div class="col-auto">
+                  <label for="{{ form.only_my.id_for_label }}">
+                    {{ form.only_my }}
+                    {{ form.only_my.label }}
+                  </label>
+                </div>
+
+                <div class="col">
+                  <input type="submit" class="btn btn-primary float-end" value="Показать" />
+                </div>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
   </div>
   <table class="table">
     <thead>

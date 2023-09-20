@@ -15,3 +15,13 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ('name', 'description', 'executor', 'status', 'labels')
+
+class SearchTaskForm(forms.ModelForm):
+    executor = forms.ModelChoiceField(User.objects.all(), required=False, widget=forms.Select(attrs={'class': 'form-select'}))
+    status = forms.ModelChoiceField(Status.objects.all(), required=False, widget=forms.Select(attrs={'class': 'form-select'}))
+    labels = forms.ModelMultipleChoiceField(Label.objects.all(), required=False, widget=forms.SelectMultiple(attrs={'class': 'form-select'}))
+    only_my = forms.BooleanField(label='Только свои задачи')
+
+    class Meta:
+        model = Task
+        fields = ('executor', 'status', 'labels', 'only_my')

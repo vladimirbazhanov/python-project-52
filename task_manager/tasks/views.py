@@ -4,15 +4,24 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.views import View
 from django.contrib import messages
 from task_manager.mixins import LoginRequiredWithMessageMixin
-from task_manager.tasks.forms import TaskForm
+from task_manager.tasks.forms import TaskForm, SearchTaskForm
 from task_manager.tasks.models import Task
 from django.urls import reverse
 
 
 class TasksView(LoginRequiredWithMessageMixin, View):
     def get(self, request, *args, **kwargs):
-        tasks = Task.objects.all()
-        return render(request,'tasks/index.html',{'tasks': tasks})
+        form = SearchTaskForm(data=request.GET)
+        tasks = Task.objects
+        if form.data.get('status'):
+            tasks = tasks.filter(status=form.data['status'])
+        if form.data.get('executor'):
+            tasks = tasks.filter(executor=form.data['executor'])
+        if form.data.get('labels'):
+            tasks = tasks.filter(labels=form.data['labels'])
+        if form.data.get('only_my'):
+            tasks = tasks.filter(user_id=request.user.id)
+        return render(request,'tasks/index.html',{'tasks': tasks.all(), 'form': form})
 
 class TaskView(LoginRequiredWithMessageMixin, View):
     def get(self, request, *args, **kwargs):
