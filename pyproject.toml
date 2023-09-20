@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "Fourth Hexlet Project"
 authors = ["Vladimir Bazhanov <vladimir.a.bazhanov@gmail.com>"]
 readme = "README.md"
+packages = [
+    { include = 'task_manager' }
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
