@@ -17,8 +17,8 @@ class TasksView(LoginRequiredWithMessageMixin, View):
             tasks = tasks.filter(status=form.data['status'])
         if form.data.get('executor'):
             tasks = tasks.filter(executor=form.data['executor'])
-        if form.data.get('labels'):
-            tasks = tasks.filter(labels=form.data['labels'])
+        if form.data.get('label'):
+            tasks = tasks.filter(labels=form.data['label'])
         if form.data.get('only_my'):
             tasks = tasks.filter(user_id=request.user.id)
         return render(request,'tasks/index.html',{'tasks': tasks.all(), 'form': form})

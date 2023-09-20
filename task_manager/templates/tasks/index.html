@@ -18,22 +18,28 @@
             <form method="GET" action="{% url 'tasks:index' %}">
               <div class="row">
                 <div class="col-auto">
-                  {{ form.status }}
+                  <label for="{{ form.status.id_for_label }}">
+                    {{ form.status.label }}
+                    {{ form.status }}
+                  </label>
                 </div>
                 <div class="col-auto">
-                  {{ form.executor }}
+                  <label for="{{ form.executor.id_for_label }}">
+                    {{ form.executor.label }}
+                    {{ form.executor }}
+                  </label>
                 </div>
                 <div class="col-auto">
-                  {{ form.labels }}
+                  <label for="{{ form.label.id_for_label }}">
+                    {{ form.label.label }}
+                    {{ form.label }}
+                  </label>
                 </div>
-                <div class="col-auto">
+                <div class="col">
                   <label for="{{ form.only_my.id_for_label }}">
                     {{ form.only_my }}
                     {{ form.only_my.label }}
                   </label>
-                </div>
-
-                <div class="col">
                   <input type="submit" class="btn btn-primary float-end" value="Показать" />
                 </div>
               </div>
