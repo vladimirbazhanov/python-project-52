@@ -38,6 +38,7 @@ class LoginUser(View):
 class LogoutUser(View):
     def post(self, request, *args, **kwargs):
         auth.logout(request)
+        messages.info(request, 'Вы разлогинены')
         return HttpResponseRedirect('/')
 
 
