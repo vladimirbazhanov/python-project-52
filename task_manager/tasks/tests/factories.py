@@ -13,4 +13,3 @@ class TaskFactory(factory.django.DjangoModelFactory):
     status = factory.SubFactory(StatusFactory)
     user = factory.SubFactory(UserFactory)
     executor = factory.SubFactory(UserFactory)
-

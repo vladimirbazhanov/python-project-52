@@ -1,6 +1,5 @@
 from django.test import TestCase
 from task_manager.tasks.tests.factories import TaskFactory
-from task_manager.users.tests.factories import UserFactory
 
 
 class TaskCreateTestCase(TestCase):
