@@ -10,6 +10,9 @@ install:
 start:
 	poetry run gunicorn task_manager.wsgi:application
 
+lint:
+	poetry run flake8 --exclude=migrations
+
 tests:
 	poetry run ./manage.py test
 
