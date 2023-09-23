@@ -1,11 +1,11 @@
 from django import forms
 from task_manager.users.models import User
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import password_validation
 from django.utils.translation import gettext_lazy as _
 
 
-class UserForm(forms.ModelForm):
+class UserForm(UserCreationForm):
     first_name = forms.CharField(
         max_length=32, widget=forms.TextInput(attrs={'class': 'form-control'})
     )
