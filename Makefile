@@ -11,7 +11,7 @@ start:
 	poetry run gunicorn task_manager.wsgi:application
 
 lint:
-	poetry run flake8 --exclude=migrations
+	poetry run flake8
 
 tests: migrate
 	poetry run ./manage.py test
