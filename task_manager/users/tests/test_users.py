@@ -5,14 +5,12 @@ from task_manager.users.models import User
 
 
 class UsersTestCase(TestCase):
+    fixtures = ['users']
+    
     def setUp(self):
         self.client = Client()
-        self.user1 = UserFactory()
-        self.user1.set_password('password_qwerty')
-        self.user1.save()
-        self.user2 = UserFactory()
-        self.user2.set_password('password_qwerty')
-        self.user2.save()
+        self.user1 = User.objects.first()
+        self.user2 = User.objects.last()
 
     def test_list_users(self):
         url = reverse('users:index')
