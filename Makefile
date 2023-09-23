@@ -1,7 +1,7 @@
 dev:
 	poetry run ./manage.py runserver
 
-migrations:
+migrate:
 	poetry run ./manage.py migrate
 
 install:
@@ -13,6 +13,6 @@ start:
 lint:
 	poetry run flake8 --exclude=migrations
 
-tests:
+tests: migrate
 	poetry run ./manage.py test
 
