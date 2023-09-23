@@ -1,37 +1,33 @@
 from django.test import TestCase, Client
 from faker import Faker
+
+from task_manager.labels.models import Label
 from task_manager.tasks.models import Task
-from task_manager.users.tests.factories import UserFactory
-from task_manager.labels.tests.factories import LabelFactory
-from task_manager.statuses.tests.factories import StatusFactory
+from task_manager.users.models import User
+from task_manager.statuses.models import Status
 from django.urls import reverse
 
 
 class CreateTaskTestCase(TestCase):
-    def setUp(self) -> None:
+    fixtures = ['users', 'labels', 'statuses']
+
+    def setUp(self):
         self.client = Client()
         self.fake = Faker()
-        self.create_and_login_test_user(self)
+        self.user = User.objects.first()
+        self.label = Label.objects.first()
+        self.status = Status.objects.first()
+        self.client.force_login(self.user)
 
     def test_create_task(self):
-        label = LabelFactory(user=self.user)
-        status = StatusFactory(user=self.user)
-
-        request = {
+        task_data = {
             'name': self.fake.word(),
             'description': self.fake.sentence(),
-            'labels': [label.id],
-            'status': status.id,
+            'labels': [self.label.id],
+            'status': self.status.id,
             'executor': self.user.id
         }
-        response = self.client.post(reverse('tasks:create'), request, follow=True)
+        response = self.client.post(reverse('tasks:create'), task_data, follow=True)
         self.assertRedirects(response, reverse('tasks:index'))
         self.assertContains(response, 'Задача успешно создана')
         self.assertEqual(Task.objects.count(), 1)
-
-    @staticmethod
-    def create_and_login_test_user(self):
-        self.user = UserFactory.create()
-        self.user.set_password('password_qwerty')
-        self.user.save()
-        self.client.login(username=self.user.username, password='password_qwerty')

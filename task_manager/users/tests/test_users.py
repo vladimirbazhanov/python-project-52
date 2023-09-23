@@ -44,14 +44,7 @@ class UsersTestCase(TestCase):
         response = self.client.get(reverse('users:create'))
         self.assertContains(response, 'Регистрация')
 
-        user_data = {
-            'username': 'test',
-            'first_name': 'Test',
-            'last_name': 'User',
-            'password1': 'password_qwerty',
-            'password2': 'password_qwerty'
-        }
-        response = self.client.post(reverse('users:create'), user_data, follow=True)
+        response = self.client.post(reverse('users:create'), self.user_data(), follow=True)
         self.assertContains(response, 'Пользователь успешно зарегистрирован')
         self.assertEquals(User.objects.count(), 3)  # two created for tests and one registered here
 
@@ -68,16 +61,8 @@ class UsersTestCase(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertContains(response, 'Изменение пользователя')
 
-        user_data = {
-            'username': 'test',
-            'first_name': 'Test',
-            'last_name': 'User',
-            'password1': 'password_qwerty',
-            'password2': 'password_qwerty'
-        }
-
         response = self.client.post(
-            reverse('users:update', kwargs={'id': self.user1.id}), user_data, follow=True
+            reverse('users:update', kwargs={'id': self.user1.id}), self.user_data(), follow=True
         )
         self.assertContains(response, 'Пользователь успешно изменен')
 
@@ -98,3 +83,12 @@ class UsersTestCase(TestCase):
             reverse('users:delete', kwargs={'id': self.user1.id}), follow=True
         )
         self.assertContains(response, 'Пользователь успешно удален')
+
+    def user_data(self):
+        return {
+            'username': 'test',
+            'first_name': 'Test',
+            'last_name': 'User',
+            'password1': 'password_qwerty',
+            'password2': 'password_qwerty'
+        }

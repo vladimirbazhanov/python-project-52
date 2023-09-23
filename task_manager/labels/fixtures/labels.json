@@ -1,0 +1,20 @@
+[
+{
+    "model": "labels.label",
+    "pk": 1,
+    "fields": {
+        "name": "label_1",
+        "user": 1,
+        "timestamp": "2023-09-23T14:54:47.727Z"
+    }
+},
+{
+    "model": "labels.label",
+    "pk": 2,
+    "fields": {
+        "name": "label_2",
+        "user": 2,
+        "timestamp": "2023-09-23T14:55:25.681Z"
+    }
+}
+]
