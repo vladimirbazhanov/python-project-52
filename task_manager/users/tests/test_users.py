@@ -1,12 +1,11 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from task_manager.users.tests.factories import UserFactory
 from task_manager.users.models import User
 
 
 class UsersTestCase(TestCase):
     fixtures = ['users']
-    
+
     def setUp(self):
         self.client = Client()
         self.user1 = User.objects.first()
