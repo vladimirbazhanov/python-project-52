@@ -8,14 +8,14 @@ from task_manager.mixins import LoginRequiredWithMessageMixin
 from .models import User
 
 
-class UsersView(View):
+class ListUsersView(View):
     def get(self, request, *args, **kwargs):
         User = get_user_model()
         users = User.objects.all()
         return render(request, 'users/index.html', {'users': users})
 
 
-class LoginUser(View):
+class LoginUserView(View):
     def get(self, request, *args, **kwargs):
         form = UserAuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
@@ -24,6 +24,7 @@ class LoginUser(View):
         MSG = 'Пожалуйста, введите правильные имя пользователя и пароль. '\
               'Оба поля могут быть чувствительны к регистру.'
         form = UserAuthenticationForm(data=request.POST)
+
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -38,7 +39,7 @@ class LoginUser(View):
         return HttpResponseRedirect('/')
 
 
-class LogoutUser(View):
+class LogoutUserView(View):
     def post(self, request, *args, **kwargs):
         auth.logout(request)
         messages.info(request, 'Вы разлогинены')
@@ -80,7 +81,7 @@ class UpdateUserView(LoginRequiredWithMessageMixin, View):
             messages.error(request, 'У вас нет прав для изменения другого пользователя.')
             return HttpResponseRedirect('/users')
 
-        form = UserForm(instance=user, data=request.POST)
+        form = UserForm(instance=request.user, data=request.POST)
         if form.is_valid():
             form.save()
             messages.info(request, 'Пользователь успешно изменен')

@@ -32,6 +32,6 @@ class CreateTaskTestCase(TestCase):
     @staticmethod
     def create_and_login_test_user(self):
         self.user = UserFactory.create()
-        self.user.set_password('12345678_qwerty')
+        self.user.set_password('password_qwerty')
         self.user.save()
-        self.client.login(username=self.user.username, password='12345678_qwerty')
+        self.client.login(username=self.user.username, password='password_qwerty')
