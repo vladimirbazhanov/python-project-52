@@ -1,5 +1,3 @@
-import pdb
-
 from django.shortcuts import render, HttpResponseRedirect
 from django.views import View
 from django.contrib import messages
@@ -26,7 +24,7 @@ class LoginUserView(View):
         MSG = 'Пожалуйста, введите правильные имя пользователя и пароль. '\
               'Оба поля могут быть чувствительны к регистру.'
         form = UserAuthenticationForm(data=request.POST)
-        pdb.set_trace()
+
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
