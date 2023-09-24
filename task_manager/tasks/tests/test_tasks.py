@@ -40,7 +40,20 @@ class CreateTaskTestCase(TestCase):
         self.assertEqual(Task.objects.count(), 3)  # two from fixtures and one created here
 
     def test_update_task(self):
-        pass
+        task_data = {
+            'name': 'New name',
+            'description': 'New description',
+            'labels': [self.label.id],
+            'status': self.status.id,
+            'executor': self.user.id
+        }
+        url = reverse('tasks:update', kwargs={'id': self.task1.id})
+        response = self.client.post(url, task_data, follow=True)
+        self.assertContains(response, 'Задача успешно изменена')
+        self.assertContains(response, 'New name')
 
     def test_delete_task(self):
-        pass
+        url = reverse('tasks:delete', kwargs={'id': self.task1.id})
+        response = self.client.post(url, follow=True)
+        self.assertContains(response, 'Задача успешно удалена')
+        self.assertEquals(Task.objects.count(), 1)
