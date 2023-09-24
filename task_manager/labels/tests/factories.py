@@ -8,4 +8,4 @@ class LabelFactory(factory.django.DjangoModelFactory):
         model = Label
 
     name = factory.Faker('word')
-    user = UserFactory()
+    user = factory.SubFactory(UserFactory)
