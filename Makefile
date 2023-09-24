@@ -4,7 +4,7 @@ dev:
 migrate:
 	poetry run ./manage.py migrate
 
-install: migrate
+install:
 	poetry install
 
 start:
