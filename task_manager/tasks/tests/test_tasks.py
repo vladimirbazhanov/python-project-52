@@ -9,7 +9,7 @@ from django.urls import reverse
 
 
 class CreateTaskTestCase(TestCase):
-    fixtures = ['users', 'labels', 'statuses']
+    fixtures = ['users', 'labels', 'statuses', 'tasks']
 
     def setUp(self):
         self.client = Client()
@@ -17,7 +17,14 @@ class CreateTaskTestCase(TestCase):
         self.user = User.objects.first()
         self.label = Label.objects.first()
         self.status = Status.objects.first()
+        self.task1 = Task.objects.first()
+        self.task2 = Task.objects.last()
         self.client.force_login(self.user)
+
+    def test_list_tasks(self):
+        response = self.client.get(reverse('tasks:index'))
+        self.assertContains(response, self.task1.name)
+        self.assertContains(response, self.task2.name)
 
     def test_create_task(self):
         task_data = {
@@ -30,4 +37,4 @@ class CreateTaskTestCase(TestCase):
         response = self.client.post(reverse('tasks:create'), task_data, follow=True)
         self.assertRedirects(response, reverse('tasks:index'))
         self.assertContains(response, 'Задача успешно создана')
-        self.assertEqual(Task.objects.count(), 1)
+        self.assertEqual(Task.objects.count(), 3)  # two from fixtures and one created here

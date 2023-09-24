@@ -1,0 +1,32 @@
+[
+{
+    "model": "tasks.task",
+    "pk": 1,
+    "fields": {
+        "name": "Test task 1",
+        "description": "Test task 1 description",
+        "user": 1,
+        "executor": 1,
+        "status": 1,
+        "timestamp": "2023-09-24T08:37:32.942Z",
+        "labels": [
+            1
+        ]
+    }
+},
+{
+    "model": "tasks.task",
+    "pk": 2,
+    "fields": {
+        "name": "Test task 1",
+        "description": "Test task 1 description",
+        "user": 2,
+        "executor": 2,
+        "status": 2,
+        "timestamp": "2023-09-24T08:37:32.942Z",
+        "labels": [
+            2
+        ]
+    }
+}
+]

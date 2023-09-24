@@ -46,7 +46,7 @@ class UsersTestCase(TestCase):
 
         response = self.client.post(reverse('users:create'), self.user_data(), follow=True)
         self.assertContains(response, 'Пользователь успешно зарегистрирован')
-        self.assertEquals(User.objects.count(), 3)  # two created for tests and one registered here
+        self.assertEquals(User.objects.count(), 3)  # two from fixtures and one created here
 
     def test_update_user(self):
         self.client.force_login(self.user1)

@@ -1,6 +1,5 @@
 from django.test import TestCase
 from task_manager.labels.tests.factories import LabelFactory
-from task_manager.users.tests.factories import UserFactory
 
 
 class LabelCreateTestCase(TestCase):
