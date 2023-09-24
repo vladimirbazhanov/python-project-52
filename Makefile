@@ -16,3 +16,6 @@ lint:
 tests: migrate
 	poetry run ./manage.py test
 
+tests-with-coverage:
+	poetry run coverage run ./manage.py test
+
