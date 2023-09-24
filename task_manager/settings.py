@@ -135,7 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/login'
 
-if os.environ['DJANGO_ENV'] == 'production':
+if os.environ.get('DJANGO_ENV') == 'production':
     ROLLBAR = {
         'access_token': 'c32f11038ee447669fe1b213f5f9f461',
         'environment': 'production',
