@@ -21,3 +21,20 @@ class StatusesTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.status1.name)
         self.assertNotContains(response, self.status2.name)
+
+    def test_create_status(self):
+        response = self.client.post(reverse('statuses:create'), {'name': 'status_3'}, follow=True)
+        self.assertContains(response, 'Статус успешно создан')
+        self.assertContains(response, 'status_3')
+        self.assertEquals(Status.objects.count(), 3)
+
+    def test_update_status(self):
+        url = reverse('statuses:update', kwargs={'id': self.status1.id})
+        response = self.client.post(url, {'name': 'new_status'}, follow=True)
+        self.assertContains(response, 'Статус успешно изменен')
+        self.assertContains(response, 'new_status')
+
+    def test_delete_status(self):
+        url = reverse('statuses:delete', kwargs={'id': self.status1.id})
+        response = self.client.post(url, follow=True)
+        self.assertContains(response, 'Статус успешно удален')

@@ -21,3 +21,20 @@ class LabelsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.label1.name)
         self.assertNotContains(response, self.label2.name)
+
+    def test_create_label(self):
+        response = self.client.post(reverse('labels:create'), {'name': 'label_3'}, follow=True)
+        self.assertContains(response, 'Метка успешно создана')
+        self.assertContains(response, 'label_3')
+        self.assertEquals(Label.objects.count(), 3)
+
+    def test_update_label(self):
+        url = reverse('labels:update', kwargs={'id': self.label1.id})
+        response = self.client.post(url, {'name': 'new_label'}, follow=True)
+        self.assertContains(response, 'Метка успешно изменена')
+        self.assertContains(response, 'new_label')
+
+    def test_delete_label(self):
+        url = reverse('labels:delete', kwargs={'id': self.label1.id})
+        response = self.client.post(url, follow=True)
+        self.assertContains(response, 'Метка успешно удалена')

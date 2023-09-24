@@ -38,3 +38,9 @@ class CreateTaskTestCase(TestCase):
         self.assertRedirects(response, reverse('tasks:index'))
         self.assertContains(response, 'Задача успешно создана')
         self.assertEqual(Task.objects.count(), 3)  # two from fixtures and one created here
+
+    def test_update_task(self):
+        pass
+
+    def test_delete_task(self):
+        pass
