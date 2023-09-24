@@ -6,6 +6,7 @@ on:
 env:
   SECRET_KEY: ${{ vars.SECRET_KEY }}
   DEBUG: ${{ vars.DEBUG }}
+  DATABASE_URL: 'sqlite:///db.sqlite3'
 
 jobs:
   build:
