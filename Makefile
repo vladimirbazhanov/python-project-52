@@ -17,5 +17,4 @@ tests: migrate
 	poetry run ./manage.py test
 
 tests-with-coverage:
-	poetry run coverage run ./manage.py test
-
+	poetry run coverage run ./manage.py test && poetry run coverage report && poetry run coverage xml
