@@ -34,5 +34,5 @@ jobs:
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v5.0.0
         with:
-          coverageCommand: tests-with-coverage
+          coverageCommand: make tests-with-coverage
           debug: true
