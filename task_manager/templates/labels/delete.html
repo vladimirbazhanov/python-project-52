@@ -1,14 +1,20 @@
 {% extends 'base_layout.html' %}
 
+{% load i18n %}
+
 {% block content %}
-    <h3>Удаление метки</h3>
+    <h3>{% translate 'Removing label' %}Удаление метки</h3>
     <div class="mb-3">
-      <strong>Вы уверены, что хотите удалить метку {{ label.name }} ?</strong>
+      <strong>
+        {% blocktranslate with label_name=label.name %}
+          Are you sure you want to remove label {{ label_name }}?
+        {% endblocktranslate %}
+      </strong>
     </div>
     <form method="POST" action="{% url 'labels:delete' label.id %}">
       {% csrf_token %}
       <div class="mb-3">
-        <input class='btn btn-danger' type="submit" value="Да, удалить">
+        <input class='btn btn-danger' type="submit" value="{% translate 'Yes, delete' %}Да, удалить">
       </div>
     </form>
 {% endblock %}

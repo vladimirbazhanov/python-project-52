@@ -30,7 +30,7 @@ class LoginUserView(View):
             password = form.cleaned_data['password']
             user = auth.authenticate(username=username, password=password)
             if user:
-                messages.info(request, 'Вы залогинены')
+                messages.info(request, _('You are signed in'))
                 auth.login(request, user)
             else:
                 messages.error(request, MSG)
@@ -42,7 +42,7 @@ class LoginUserView(View):
 class LogoutUserView(View):
     def post(self, request, *args, **kwargs):
         auth.logout(request)
-        messages.info(request, 'Вы разлогинены')
+        messages.info(request, _('You are signed out'))
         return HttpResponseRedirect('/')
 
 

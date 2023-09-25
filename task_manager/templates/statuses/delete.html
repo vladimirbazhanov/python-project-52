@@ -1,14 +1,16 @@
 {% extends 'base_layout.html' %}
 
+{% load i18n %}
+
 {% block content %}
-    <h3>Удаление статуса</h3>
+    <h3>{% translate 'Deleting status' %}Удаление статуса</h3>
     <div class="mb-3">
       <strong>Вы уверены, что хотите удалить статус {{ status.name }} ?</strong>
     </div>
     <form method="POST" action="{% url 'statuses:delete' status.id %}">
       {% csrf_token %}
       <div class="mb-3">
-        <input class='btn btn-danger' type="submit" value="Да, удалить">
+        <input class='btn btn-danger' type="submit" value="{% translate 'Yes, delete' %}Да, удалить">
       </div>
     </form>
 {% endblock %}

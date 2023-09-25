@@ -13,6 +13,7 @@ class UserForm(UserCreationForm):
         max_length=32, widget=forms.TextInput(attrs={'class': 'form-control'})
     )
     username = forms.CharField(
+        label=_('Username'),
         max_length=32, widget=forms.TextInput(attrs={'class': 'form-control'})
     )
     password1 = forms.CharField(

@@ -1,5 +1,7 @@
 {% extends 'base_layout.html' %}
 
+{% load i18n %}
+
 {% block content %}
     <h3>Изменить задачу</h3>
     <form method="POST" action="{% url 'tasks:update' form.instance.id %}">

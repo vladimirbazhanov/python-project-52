@@ -1,12 +1,14 @@
 {% extends 'base_layout.html' %}
 
+{% load i18n %}
+
 {% block content %}
     <form method="POST" action="{% url 'statuses:create' %}">
       {% csrf_token %}
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="card">
-            <div class="card-header">Создать статус</div>
+            <div class="card-header">{% translate 'Create status' %}Создать статус</div>
             <div class="card-body form-inputs">
               {% if form.errors %}
                 {{ form.errors }}
@@ -18,7 +20,7 @@
                 {{ form.name }}
               </div>
               <div class="mb-3">
-                <input type="submit" value="Создать" class="btn btn-primary">
+                <input type="submit" value="{% translate 'Create' %}Создать" class="btn btn-primary">
               </div>
             </div>
           </div>

@@ -5,14 +5,14 @@
 {% block content %}
 
     {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
+        <p>{% translate "Your username and password didn't match. Please try again." %}</p>
     {% endif %}
 
     {% if next %}
         {% if user.is_authenticated %}
-            <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+            <p>{% translate "Your account doesn't have access to this page. To proceed, please login with an account that has access." %}</p>
         {% else %}
-            <p>Please login to see this page.</p>
+            <p>{% translate "Please login to see this page." %}</p>
         {% endif %}
     {% endif %}
 
@@ -24,28 +24,23 @@
                     <div class="card-header">{% translate 'Login' %}</div>
                     <div class="card-body form-inputs">
                         <div class="form-group mb-3">
-                          <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
+                          <label for="{{ form.username.id_for_label }}">{% translate 'Username' %}</label>
                         </div>
                         <div class="form-group mb-3">
                           {{ form.username }}
                         </div>
                         <div class="form-group mb-3">
-                            <label for="{{ form.password.id_for_label }}">Пароль</label>
+                            <label for="{{ form.password.id_for_label }}">{% translate 'Password' %}</label>
                         </div>
                         <div class="form-group mb-3">
                           {{ form.password }}
                         </div>
 
-                        <input type="submit" value="Войти" class="btn btn-primary">
+                        <input type="submit" value="{% translate 'Sign in' %}" class="btn btn-primary">
                         <input type="hidden" name="next" value="{{ next }}">
                     </div>
                 </div>
-
             </div>
         </div>
     </form>
-
-    {# Assumes you set up the password_reset view in your URLconf #}
-    <!-- <p><a href=" url 'password_reset' ">Lost password?</a></p> -->
-
 {% endblock %}
