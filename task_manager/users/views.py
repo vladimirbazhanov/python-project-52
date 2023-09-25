@@ -6,6 +6,7 @@ from task_manager.users.forms import UserForm, UserAuthenticationForm
 from django.contrib import auth
 from task_manager.mixins import LoginRequiredWithMessageMixin
 from .models import User
+from django.utils.translation import gettext_lazy as _
 
 
 class ListUsersView(View):
@@ -21,8 +22,7 @@ class LoginUserView(View):
         return render(request, 'registration/login.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
-        MSG = 'Пожалуйста, введите правильные имя пользователя и пароль. '\
-              'Оба поля могут быть чувствительны к регистру.'
+        MSG = _('Please, enter correct username and password')
         form = UserAuthenticationForm(data=request.POST)
 
         if form.is_valid():
