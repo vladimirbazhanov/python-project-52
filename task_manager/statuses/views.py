@@ -75,7 +75,7 @@ class DeleteStatusView(LoginRequiredWithMessageMixin, View):
             messages.error(request, _('Can not delete status assigned to task.'))
             return HttpResponseRedirect(reverse('statuses:index'))
         else:
-            return render(request,'statuses/delete.html',{'status': status})
+            return render(request, 'statuses/delete.html', {'status': status})
 
     def post(self, request, *args, **kwargs):
         status = Status.objects.get(id=kwargs['id'])

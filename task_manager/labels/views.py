@@ -1,5 +1,3 @@
-import pdb
-
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 
@@ -68,7 +66,7 @@ class DeleteLabelView(LoginRequiredWithMessageMixin, View):
             messages.error(request, _('Can not delete label assigned to task.'))
             return HttpResponseRedirect(reverse('labels:index'))
         else:
-            return render(request,'labels/delete.html',{'label': label})
+            return render(request, 'labels/delete.html', {'label': label})
 
     def post(self, request, *args, **kwargs):
         label = Label.objects.get(id=kwargs['id'])
