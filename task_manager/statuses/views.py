@@ -4,6 +4,7 @@ from django.views import View
 from django.contrib import messages
 from task_manager.mixins import LoginRequiredWithMessageMixin
 from task_manager.statuses.models import Status
+from django.utils.translation import gettext_lazy as _
 
 
 class StatusesView(LoginRequiredWithMessageMixin, View):
@@ -30,7 +31,7 @@ class CreateStatusView(LoginRequiredWithMessageMixin, View):
         form.instance.user = request.user
         if form.is_valid():
             form.save()
-            messages.info(request, 'Статус успешно создан')
+            messages.info(request, _('Status successfully created'))
             return HttpResponseRedirect('/statuses')
         else:
             return render(request,
@@ -56,7 +57,7 @@ class UpdateStatusView(LoginRequiredWithMessageMixin, View):
         form = StatusForm(instance=status, data=request.POST)
         if form.is_valid():
             form.save()
-            messages.info(request, 'Статус успешно изменен')
+            messages.info(request, _('Status successfully updated'))
             return HttpResponseRedirect('/statuses')
         else:
             return render(request,
@@ -76,5 +77,5 @@ class DeleteStatusView(LoginRequiredWithMessageMixin, View):
     def post(self, request, *args, **kwargs):
         status = Status.objects.get(id=kwargs['id'])
         status.delete()
-        messages.info(request, 'Статус успешно удален')
+        messages.info(request, _('Status successfully deleted'))
         return HttpResponseRedirect('/statuses/')

@@ -3,13 +3,13 @@
 {% load i18n %}
 
 {% block content %}
-    <h3>{% translate 'Editing label' %}Изменить метку</h1>
+    <h3>{% translate 'Edit label' %}Изменить метку</h1>
     <form method="POST" action="{% url 'labels:update' form.instance.id %}">
       {% csrf_token %}
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="card">
-            <div class="card-header">{% translate 'Editing label' %Изменить метку</div>
+            <div class="card-header">{% translate 'Edit label' %Изменить метку</div>
             <div class="card-body form-inputs">
               {% if form.errors %}
                 {{ form.errors }}

@@ -4,11 +4,11 @@
 
 {% block content %}
   <div class="float-start">
-    <h3>Просмотр задачи</h3>
+    <h3>{% translate 'Task details' %}Просмотр задачи</h3>
   </div>
   <div class="float-end">
-    <a href='{% url 'tasks:update' task.id %}' class="btn btn-primary btn-sm">Изменить</a>
-    <a href='{% url 'tasks:delete' task.id %}' class="btn btn-danger btn-sm">Удалить</a>
+    <a href='{% url 'tasks:update' task.id %}' class="btn btn-primary btn-sm">{% translate 'Edit' %}</a>
+    <a href='{% url 'tasks:delete' task.id %}' class="btn btn-danger btn-sm">{% translate 'Delete' %}</a>
   </div>
   <div class="row">
     <div class="col-md-12">
@@ -17,20 +17,18 @@
         <div class="card-body">
           <p>{{ task.description }}</p>
           <hr/>
-          <p>Автор: {{ task.user }}</p>
-          <p>Исполнитель: {{ task.executor }}</p>
-          <p>Статус: {{ task.status }}</p>
-          <p>Дата создания: {{ task.timestamp }}</p>
-          <p>Метки:</p>
+          <p>{% translate 'Author' %}: {{ task.user }}</p>
+          <p>{% translate 'Executor' %}: {{ task.executor }}</p>
+          <p>{% translate 'Status' %}: {{ task.status }}</p>
+          <p>{% translate 'Date' %}: {{ task.timestamp }}</p>
+          <p>{% translate 'Labels' %}:</p>
           <ul>
             {% for label in task.labels.all %}
               <li>{{ label }}</li>
             {% endfor %}
           </ul>
-
         </div>
       </div>
     </div>
   </div>
-
 {% endblock %}

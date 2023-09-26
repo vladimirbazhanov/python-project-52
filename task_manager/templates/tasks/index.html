@@ -6,10 +6,10 @@
   <div class="row">
     <div class="col-md-12">
       <div class="float-start">
-        <h3>Задачи</h3>
+        <h3>{% translate 'Tasks' %}</h3>
       </div>
       <div class="float-end">
-        <a class="btn btn-primary btn-sm" href="{% url 'tasks:create' %}">Создать задачу</a>
+        <a class="btn btn-primary btn-sm" href="{% url 'tasks:create' %}">{% translate 'Create tasks' %}</a>
       </div>
     </div>
   </div>
@@ -42,7 +42,7 @@
                     {{ form.only_my }}
                     {{ form.only_my.label }}
                   </label>
-                  <input type="submit" class="btn btn-primary float-end" value="Показать" />
+                  <input type="submit" class="btn btn-primary float-end" value="{% translate 'Show' %}" />
                 </div>
               </div>
             </form>
@@ -53,12 +53,12 @@
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Имя</th>
-        <th>Статус</th>
-        <th>Автор</th>
-        <th>Исполнитель</th>
-        <th>Дата создания</th>
+        <th>{% translate 'ID' %}</th>
+        <th>{% translate 'Name' %}Имя</th>
+        <th>{% translate 'Status' %}Статус</th>
+        <th>{% translate 'Author' %}Автор</th>
+        <th>{% translate 'Executor' %}Исполнитель</th>
+        <th>{% translate 'Date' %}Дата создания</th>
         <th></th>
       </tr>
     </thead>
@@ -72,8 +72,8 @@
           <td>{{ task.executor.username }}</td>
           <td>{{ task.timestamp|date:'d.m.Y H:i' }}</td>
           <td class="float-end">
-            <a href='{% url 'tasks:update' task.id %}' class="btn btn-primary btn-sm">Изменить</a>
-            <a href='{% url 'tasks:delete' task.id %}' class="btn btn-danger btn-sm">Удалить</a>
+            <a href='{% url 'tasks:update' task.id %}' class="btn btn-primary btn-sm">{% translate 'Edit' %}</a>
+            <a href='{% url 'tasks:delete' task.id %}' class="btn btn-danger btn-sm">{% translate 'Delete' %}</a>
           </td>
         </tr>
       {% endfor %}

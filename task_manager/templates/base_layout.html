@@ -19,30 +19,30 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/users">Пользователи</a>
+                    <a class="nav-link" aria-current="page" href="/users">{% translate 'Users' %}</a>
                  </li>
                 {% if request.user.is_authenticated %}
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'tasks:index' %}">Задачи</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'tasks:index' %}">{% translate 'Tasks' %}</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'statuses:index' %}">Статусы</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'statuses:index' %}">{% translate 'Statuses' %}</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'labels:index' %}">Метки</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'labels:index' %}">{% translate 'Labels' %}</a>
                   </li>
                   <li class="nav-item">
                     <form method="POST" action="{% url 'logout' %}">
                       {% csrf_token %}
-                      <input type="submit" class="btn nav-link" value="Выход" />
+                      <input type="submit" class="btn nav-link" value="{% translate 'Sign out' %}" />
                     </form>
                   </li>
                 {% else %}
                   <li class="nav-item">
-                    <a class="nav-link" role="button" aria-current="page" href="{% url 'login' %}">Вход</a>
+                    <a class="nav-link" role="button" aria-current="page" href="{% url 'login' %}">{% translate 'Sign in' %}</a>
                   </li>
                   <li>
-                    <a class="nav-link" role="button" aria-current="page" href="{% url 'users:create' %}">Регистрация</a>
+                    <a class="nav-link" role="button" aria-current="page" href="{% url 'users:create' %}">{% translate 'Sign up' %}</a>
                   </li>
                 {% endif %}
             </ul>

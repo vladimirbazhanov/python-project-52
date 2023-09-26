@@ -3,13 +3,13 @@
 {% load i18n %}
 
 {% block content %}
-    <h3>Изменить статус</h1>
+    <h3>{% translate 'Edit status' %}Изменить статус</h1>
     <form method="POST" action="{% url 'statuses:update' form.instance.id %}">
       {% csrf_token %}
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="card">
-            <div class="card-header">Изменить статус</div>
+            <div class="card-header">{% translate 'Edit status' %}</div>
             <div class="card-body form-inputs">
               {% if form.errors %}
                 {{ form.errors }}
@@ -21,7 +21,7 @@
                 {{ form.name }}
               </div>
               <div class="mb-3">
-                <input type="submit" value="Изменить" class="btn btn-primary">
+                <input type="submit" value="{% translate 'Edit' %}" class="btn btn-primary">
               </div>
             </div>
           </div>

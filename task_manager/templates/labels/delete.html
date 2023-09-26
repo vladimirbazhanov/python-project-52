@@ -6,9 +6,7 @@
     <h3>{% translate 'Removing label' %}Удаление метки</h3>
     <div class="mb-3">
       <strong>
-        {% blocktranslate with label_name=label.name %}
-          Are you sure you want to remove label {{ label_name }}?
-        {% endblocktranslate %}
+        {% blocktranslate with label_name=label.name %}Are you sure you want to remove label {{ label_name }}?{% endblocktranslate %}
       </strong>
     </div>
     <form method="POST" action="{% url 'labels:delete' label.id %}">

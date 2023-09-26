@@ -5,6 +5,7 @@ from task_manager.mixins import LoginRequiredWithMessageMixin
 from task_manager.tasks.forms import TaskForm, SearchTaskForm
 from task_manager.tasks.models import Task
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 
 class TasksView(LoginRequiredWithMessageMixin, View):
@@ -38,7 +39,7 @@ class CreateTaskView(View):
         form.instance.user = request.user
         if form.is_valid():
             form.save()
-            messages.info(request, 'Задача успешно создана')
+            messages.info(request, _('Task successfully created'))  # Задача успешно создана
             return HttpResponseRedirect(reverse('tasks:index'))
         else:
             return render(request, 'tasks/create.html', {'form': form})
@@ -55,7 +56,7 @@ class UpdateTaskView(LoginRequiredWithMessageMixin, View):
         form = TaskForm(instance=task, data=request.POST)
         if form.is_valid():
             form.save()
-            messages.info(request, 'Задача успешно изменена')
+            messages.info(request, _('Task successfully updated'))
             return HttpResponseRedirect('/tasks')
         else:
             return render(request, 'tasks/update.html', {'form': form})
@@ -67,14 +68,14 @@ class DeleteTaskView(LoginRequiredWithMessageMixin, View):
         if task.user_id == request.user.id:
             return render(request, 'tasks/delete.html', {'task': task})
         else:
-            messages.error(request, 'Задачу может удалить только ее автор')
+            messages.error(request, _('Only owner can update task'))
             return HttpResponseRedirect('/tasks')
 
     def post(self, request, *args, **kwargs):
         task = Task.objects.get(id=kwargs['id'])
         if task.user_id == request.user.id:
-            messages.info(request, 'Задача успешно удалена')
             task.delete()
+            messages.info(request, _('Task successfully deleted'))
         else:
-            messages.error(request, 'Задачу может удалить только ее автор')
+            messages.error(request, _('Only owner can delete task'))
         return HttpResponseRedirect('/tasks')

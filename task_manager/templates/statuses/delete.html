@@ -5,7 +5,10 @@
 {% block content %}
     <h3>{% translate 'Deleting status' %}Удаление статуса</h3>
     <div class="mb-3">
-      <strong>Вы уверены, что хотите удалить статус {{ status.name }} ?</strong>
+      <strong>
+        {% blocktranslate with status_name=status.name %}Are you sure you want to remove status {{ status_name }}?{% endblocktranslate %}
+      </strong>
+        Вы уверены, что хотите удалить статус {{ status.name }} ?
     </div>
     <form method="POST" action="{% url 'statuses:delete' status.id %}">
       {% csrf_token %}

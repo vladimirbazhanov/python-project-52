@@ -8,48 +8,48 @@
       <div class="row">
           <div class="col-md-6 offset-md-3">
               <div class="card">
-                  <div class="card-header">Регистрация</div>
+                  <div class="card-header">{% translate 'Sign up' %}</div>
                   <div class="card-body form-inputs">
                     {% if form.errors %}
                       {{ form.errors }}
                     {% endif %}
                     <div class="form-group mb-3">
-                      <label for="{{ form.first_name.id_for_label }}">Имя</label>
+                      <label for="{{ form.first_name.id_for_label }}">{% translate 'First name' %}}</label>
                     </div>
                     <div class="form-group mb-3">
                       {{ form.first_name }}
                     </div>
 
                     <div class="form-group mb-3">
-                      <label for="{{ form.last_name.id_for_label }}">Фамилия</label>
+                      <label for="{{ form.last_name.id_for_label }}">{% translate 'Last name' %}</label>
                     </div>
                     <div class="form-group mb-3">
                       {{ form.last_name }}
                     </div>
 
                     <div class="form-group mb-3">
-                      <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
+                      <label for="{{ form.username.id_for_label }}">{% translate 'Username' %}</label>
                     </div>
                     <div class="form-group mb-3">
                       {{ form.username }}
                     </div>
 
                     <div class="form-group mb-3">
-                      <label for="{{ form.password1.id_for_label }}">Пароль</label>
+                      <label for="{{ form.password1.id_for_label }}">{% translate 'Password' %}</label>
                     </div>
                     <div class="form-group mb-3">
                       {{ form.password1 }}
                     </div>
 
                     <div class="form-group mb-3">
-                      <label for="{{ form.password2.id_for_label }}">Подтверждение пароля</label>
+                      <label for="{{ form.password2.id_for_label }}">{% translate 'Password confirmation' %}</label>
                     </div>
                     <div class="form-group mb-3">
                       {{ form.password2 }}
                     </div>
 
                     <div class="form-group mb-3">
-                      <input type="submit" class="btn btn-primary" value="Зарегистрировать" />
+                      <input type="submit" class="btn btn-primary" value="{% translate 'Sign up' %}" />
                     </div>
                   </div>
               </div>

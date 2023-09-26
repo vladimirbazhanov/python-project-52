@@ -7,13 +7,13 @@
     <h3>Статусы</h3>
   </div>
   <div class="float-end">
-    <a class="btn btn-primary btn-sm" href="{% url 'statuses:create' %}">Создать статус</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'statuses:create' %}">{% translate 'Create status' %}Создать статус</a>
   </div>
   <table class="table">
     <thead>
-      <th>ID</th>
-      <th>Имя</th>
-      <th>Дата создания</th>
+      <th>{% translate 'ID' %}</th>
+      <th>{% translate 'Name' %}</th>
+      <th>{% translate 'Date' %}</th>
       <th></th>
     </thead>
     <tbody>
@@ -23,8 +23,8 @@
           <td>{{ status.name }}</td>
           <td>{{ status.timestamp|date:'d.m.Y H:i' }}</td>
           <td class="float-end">
-            <a href='{% url 'statuses:update' status.id %}' class="btn btn-primary btn-sm">Изменить</a>
-            <a href='{% url 'statuses:delete' status.id %}' class="btn btn-danger btn-sm">Удалить</a>
+            <a href='{% url 'statuses:update' status.id %}' class="btn btn-primary btn-sm">{% translate 'Edit' %}</a>
+            <a href='{% url 'statuses:delete' status.id %}' class="btn btn-danger btn-sm">{% translate 'Delete' %}</a>
           </td>
         </tr>
       {% endfor %}

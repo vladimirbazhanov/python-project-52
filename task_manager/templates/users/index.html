@@ -3,15 +3,15 @@
 {% load i18n %}
 
 {% block content %}
-    <h3>Пользователи</h3>
+    <h3>{% translate 'Users' %}</h3>
     <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Имя</th>
-            <th>Адрес E-Mail</th>
-            <th>Полное имя</th>
-            <th>Дата/время создания</th>
+            <th>{% translate 'ID' %}</th>
+            <th>{% translate 'Name' %}</th>
+            <th>{% translate 'Email' %}Адрес E-Mail</th>
+            <th>{% translate 'Full name' %}</th>
+            <th>{% translate 'Date' %}</th>
             <th></th>
             <th></th>
         </tr>
@@ -25,10 +25,10 @@
             <td>{{ user.first_name }} {{ user.last_name }}</td>
             <td>{{ user.date_joined|date:'d.m.Y H:i' }}</td>
             <td>
-              <a href='{% url 'users:update' user.id %}' class="btn btn-primary btn-sm">Изменить</a>
+              <a href='{% url 'users:update' user.id %}' class="btn btn-primary btn-sm">{% translate 'Edit' %}</a>
             </td>
             <td>
-              <a href='{% url 'users:delete' user.id %}' class="btn btn-danger btn-sm">Удалить</a>
+              <a href='{% url 'users:delete' user.id %}' class="btn btn-danger btn-sm">{% translate 'Delete' %}</a>
             </td>
         </tr>
         {%  endfor %}

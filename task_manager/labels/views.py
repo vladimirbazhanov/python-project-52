@@ -4,6 +4,7 @@ from django.views import View
 from django.contrib import messages
 from task_manager.mixins import LoginRequiredWithMessageMixin
 from task_manager.labels.models import Label
+from django.utils.translation import gettext_lazy as _
 
 
 class LabelsView(LoginRequiredWithMessageMixin, View):
@@ -22,7 +23,7 @@ class CreateLabelView(LoginRequiredWithMessageMixin, View):
         form.instance.user = request.user
         if form.is_valid():
             form.save()
-            messages.info(request, 'Метка успешно создана')
+            messages.info(request, _('Label successfully created'))
             return HttpResponseRedirect('/labels')
         else:
             return render(request,
@@ -47,7 +48,7 @@ class UpdateLabelView(LoginRequiredWithMessageMixin, View):
         form = LabelForm(instance=label, data=request.POST)
         if form.is_valid():
             form.save()
-            messages.info(request, 'Метка успешно изменена')
+            messages.info(request, _('Label successfully updated'))
             return HttpResponseRedirect('/labels')
         else:
             return render(request,
@@ -67,5 +68,5 @@ class DeleteLabelView(LoginRequiredWithMessageMixin, View):
     def post(self, request, *args, **kwargs):
         label = Label.objects.get(id=kwargs['id'])
         label.delete()
-        messages.info(request, 'Метка успешно удалена')
+        messages.info(request, _('Label successfully deleted'))
         return HttpResponseRedirect('/labels/')

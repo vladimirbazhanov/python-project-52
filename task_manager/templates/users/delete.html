@@ -3,14 +3,16 @@
 {% load i18n %}
 
 {% block content %}
-    <h3>Удаление пользователя</h3>
+    <h3>{% translate 'Delete user' %}</h3>
     <div class="mb-3">
-      <strong>Вы уверены, что хотите удалить {{ user.first_name }} {{ user.last_name }}?</strong>
+      <strong>
+        {% blocktranslate with first_name=user.first_name last_name=task.last_name %}Are you sure you want to remove user {{ first_name }} {{ last_name }}?{% endblocktranslate %}
+      </strong>
     </div>
     <form method="POST" action="{% url 'users:delete' user.id %}">
       {% csrf_token %}
       <div class="mb-3">
-        <input class='btn btn-danger' type="submit" value="Да, удалить">
+        <input class='btn btn-danger' type="submit" value="{% translate 'Yes, delete' %}">
       </div>
     </form>
 {% endblock %}
