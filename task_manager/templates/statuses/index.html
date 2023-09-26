@@ -4,10 +4,10 @@
 
 {% block content %}
   <div class="float-start">
-    <h3>Статусы</h3>
+    <h3>{% translate 'Statuses' %}</h3>
   </div>
   <div class="float-end">
-    <a class="btn btn-primary btn-sm" href="{% url 'statuses:create' %}">{% translate 'Create status' %}Создать статус</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'statuses:create' %}">{% translate 'Create status' %}</a>
   </div>
   <table class="table">
     <thead>

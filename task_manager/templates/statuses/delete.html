@@ -3,17 +3,16 @@
 {% load i18n %}
 
 {% block content %}
-    <h3>{% translate 'Deleting status' %}Удаление статуса</h3>
+    <h3>{% translate 'Deleting status' %}</h3>
     <div class="mb-3">
       <strong>
         {% blocktranslate with status_name=status.name %}Are you sure you want to remove status {{ status_name }}?{% endblocktranslate %}
       </strong>
-        Вы уверены, что хотите удалить статус {{ status.name }} ?
     </div>
     <form method="POST" action="{% url 'statuses:delete' status.id %}">
       {% csrf_token %}
       <div class="mb-3">
-        <input class='btn btn-danger' type="submit" value="{% translate 'Yes, delete' %}Да, удалить">
+        <input class='btn btn-danger' type="submit" value="{% translate 'Yes, delete' %}">
       </div>
     </form>
 {% endblock %}

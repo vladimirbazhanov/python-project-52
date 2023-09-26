@@ -4,16 +4,16 @@
 
 {% block content %}
   <div class="float-start">
-    <h3>{% translate 'Labels' %}Метки</h3>
+    <h3>{% translate 'Labels' %}</h3>
   </div>
   <div class="float-end">
-    <a class="btn btn-primary btn-sm" href="{% url 'labels:create' %}">{% translate 'Create label' %}Создать метку</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'labels:create' %}">{% translate 'Create label' %}</a>
   </div>
   <table class="table">
     <thead>
-      <th>{% translate 'ID' %}ID</th>
-      <th>{% translate 'Name' %}Имя</th>
-      <th>{% translate 'Date' %}Дата создания</th>
+      <th>{% translate 'ID' %}</th>
+      <th>{% translate 'Name' %}</th>
+      <th>{% translate 'Date' %}</th>
       <th></th>
     </thead>
     <tbody>
@@ -23,8 +23,8 @@
           <td>{{ label.name }}</td>
           <td>{{ label.timestamp|date:'d.m.Y H:i' }}</td>
           <td class="float-end">
-            <a href='{% url 'labels:update' label.id %}' class="btn btn-primary btn-sm">{% translate 'Edit' %}Изменить</a>
-            <a href='{% url 'labels:delete' label.id %}' class="btn btn-danger btn-sm">{% translate 'Delete' %}Удалить</a>
+            <a href='{% url 'labels:update' label.id %}' class="btn btn-primary btn-sm">{% translate 'Edit' %}</a>
+            <a href='{% url 'labels:delete' label.id %}' class="btn btn-danger btn-sm">{% translate 'Delete' %}</a>
           </td>
         </tr>
       {% endfor %}

@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block content %}
-    <h3>{% translate 'Edit status' %}Изменить статус</h1>
+    <h3>{% translate 'Edit status' %}</h3>
     <form method="POST" action="{% url 'statuses:update' form.instance.id %}">
       {% csrf_token %}
       <div class="row">
