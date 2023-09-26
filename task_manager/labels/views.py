@@ -1,4 +1,8 @@
+import pdb
+
 from django.shortcuts import render, HttpResponseRedirect
+from django.urls import reverse
+
 from task_manager.labels.forms import LabelForm
 from django.views import View
 from django.contrib import messages
@@ -60,13 +64,17 @@ class UpdateLabelView(LoginRequiredWithMessageMixin, View):
 class DeleteLabelView(LoginRequiredWithMessageMixin, View):
     def get(self, request, *args, **kwargs):
         label = Label.objects.get(id=kwargs['id'])
-        return render(request,
-                      'labels/delete.html',
-                      {'label': label}
-                      )
+        if label.task_set.exists():
+            messages.error(request, _('Can not delete label assigned to task.'))
+            return HttpResponseRedirect(reverse('labels:index'))
+        else:
+            return render(request,'labels/delete.html',{'label': label})
 
     def post(self, request, *args, **kwargs):
         label = Label.objects.get(id=kwargs['id'])
-        label.delete()
-        messages.info(request, _('Label successfully deleted'))
-        return HttpResponseRedirect('/labels/')
+        if label.task_set.exists():
+            messages.error(request, _('Can not delete label assigned to task.'))
+        else:
+            label.delete()
+            messages.info(request, _('Label successfully deleted'))
+        return HttpResponseRedirect(reverse('labels:index'))

@@ -1,4 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
+from django.urls import reverse
+
 from task_manager.statuses.forms import StatusForm
 from django.views import View
 from django.contrib import messages
@@ -69,13 +71,17 @@ class UpdateStatusView(LoginRequiredWithMessageMixin, View):
 class DeleteStatusView(LoginRequiredWithMessageMixin, View):
     def get(self, request, *args, **kwargs):
         status = Status.objects.get(id=kwargs['id'])
-        return render(request,
-                      'statuses/delete.html',
-                      {'status': status}
-                      )
+        if status.task_set.exists():
+            messages.error(request, _('Can not delete status assigned to task.'))
+            return HttpResponseRedirect(reverse('statuses:index'))
+        else:
+            return render(request,'statuses/delete.html',{'status': status})
 
     def post(self, request, *args, **kwargs):
         status = Status.objects.get(id=kwargs['id'])
-        status.delete()
-        messages.info(request, _('Status successfully deleted'))
-        return HttpResponseRedirect('/statuses/')
+        if status.task_set.exists():
+            messages.error(request, _('Can not delete status assigned to task.'))
+        else:
+            status.delete()
+            messages.info(request, _('Status successfully deleted'))
+        return HttpResponseRedirect(reverse('statuses:index'))

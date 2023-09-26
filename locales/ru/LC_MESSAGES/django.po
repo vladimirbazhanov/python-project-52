@@ -331,3 +331,9 @@ msgstr "Пользователь успешно изменен"
 #: task_manager/users/views.py:102
 msgid "User successfully deleted"
 msgstr "Пользователь успешно удален"
+
+msgid "Can not delete status assigned to task."
+msgstr "Невозможно удалить статус, привязанный к задаче."
+
+msgid "Can not delete label assigned to task."
+msgstr "Невозможно удалить метку, привязанную к задаче."
