@@ -6,21 +6,23 @@ from task_manager.tasks.forms import TaskForm, SearchTaskForm
 from task_manager.tasks.models import Task
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from .filters import TaskFilter
 
 
 class TasksView(LoginRequiredWithMessageMixin, View):
     def get(self, request, *args, **kwargs):
         form = SearchTaskForm(data=request.GET)
-        tasks = Task.objects
-        if form.data.get('status'):
-            tasks = tasks.filter(status=form.data['status'])
-        if form.data.get('executor'):
-            tasks = tasks.filter(executor=form.data['executor'])
-        if form.data.get('label'):
-            tasks = tasks.filter(labels=form.data['label'])
-        if form.data.get('only_my'):
-            tasks = tasks.filter(user_id=request.user.id)
-        return render(request, 'tasks/index.html', {'tasks': tasks.all(), 'form': form})
+        # tasks = Task.objects
+        # if form.data.get('status'):
+        #     tasks = tasks.filter(status=form.data['status'])
+        # if form.data.get('executor'):
+        #     tasks = tasks.filter(executor=form.data['executor'])
+        # if form.data.get('label'):
+        #     tasks = tasks.filter(labels=form.data['label'])
+        # if form.data.get('only_my'):
+        #     tasks = tasks.filter(user_id=request.user.id)
+        filter = TaskFilter(request.GET, queryset=Task.objects.all(), request=request)
+        return render(request, 'tasks/index.html', {'form': form, 'filter': filter})
 
 
 class TaskView(LoginRequiredWithMessageMixin, View):
