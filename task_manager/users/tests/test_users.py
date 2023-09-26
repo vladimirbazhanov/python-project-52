@@ -42,7 +42,7 @@ class UsersTestCase(TestCase):
 
     def test_create_user(self):
         response = self.client.get(reverse('users:create'))
-        self.assertContains(response, 'Регистрация')
+        self.assertContains(response, 'Зарегистрировать')
 
         response = self.client.post(reverse('users:create'), self.user_data(), follow=True)
         self.assertContains(response, 'Пользователь успешно зарегистрирован')

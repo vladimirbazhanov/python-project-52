@@ -93,6 +93,9 @@ msgstr "Войти"
 msgid "Sign up"
 msgstr "Зарегистрировать"
 
+msgid "Create account"
+msgstr "Регистрация"
+
 #: task_manager/templates/labels/create.html:11
 #: task_manager/templates/labels/index.html:10
 msgid "Create label"
