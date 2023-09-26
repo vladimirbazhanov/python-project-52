@@ -3,21 +3,18 @@ from django.urls import reverse
 
 from task_manager.statuses.forms import StatusForm
 from django.views import View
+from django.views.generic.list import ListView
 from django.contrib import messages
 from task_manager.mixins import LoginRequiredWithMessageMixin
 from task_manager.statuses.models import Status
 from django.utils.translation import gettext_lazy as _
 
 
-class StatusesView(LoginRequiredWithMessageMixin, View):
-    def get(self, request, *args, **kwargs):
-        statuses = (Status.objects
-                    .filter(user_id=request.user.id)
-                    .order_by('name'))
-        return render(request,
-                      'statuses/index.html',
-                      {'statuses': statuses}
-                      )
+class StatusesView(LoginRequiredWithMessageMixin, ListView):
+    model = Status
+
+    def get_queryset(self):
+        return Status.objects.filter(user_id=self.request.user.id)
 
 
 class CreateStatusView(LoginRequiredWithMessageMixin, View):

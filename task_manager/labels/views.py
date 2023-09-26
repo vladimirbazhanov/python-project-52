@@ -3,16 +3,18 @@ from django.urls import reverse
 
 from task_manager.labels.forms import LabelForm
 from django.views import View
+from django.views.generic.list import ListView
 from django.contrib import messages
 from task_manager.mixins import LoginRequiredWithMessageMixin
 from task_manager.labels.models import Label
 from django.utils.translation import gettext_lazy as _
 
 
-class LabelsView(LoginRequiredWithMessageMixin, View):
-    def get(self, request, *args, **kwargs):
-        labels = Label.objects.filter(user_id=request.user.id).order_by('name')
-        return render(request, 'labels/index.html', {'labels': labels})
+class LabelsView(LoginRequiredWithMessageMixin, ListView):
+    model = Label
+
+    def get_queryset(self):
+        return Label.objects.filter(user_id=self.request.user.id)
 
 
 class CreateLabelView(LoginRequiredWithMessageMixin, View):
