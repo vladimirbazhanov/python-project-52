@@ -84,6 +84,9 @@ msgstr "Выход"
 msgid "Sign in"
 msgstr "Вход"
 
+msgid "Enter"
+msgstr "Войти"
+
 #: task_manager/templates/base_layout.html:45
 #: task_manager/templates/users/create.html:11
 #: task_manager/templates/users/create.html:52
